@@ -3,10 +3,28 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+        <div class="row">
+            <div class="sixteen wide column">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen wide column">
+                <h2>Sign up</h2>
+                <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Sign up</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen wide column">
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

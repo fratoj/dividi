@@ -1,0 +1,40 @@
+{% block script%}
+<script>
+    $(document)
+        .ready(function() {
+
+            // fix menu when passed
+            $('.masthead')
+                .visibility({
+                    once: false,
+                    onBottomPassed: function() {
+                        $('.fixed.menu').transition('fade in');
+                    },
+                    onBottomPassedReverse: function() {
+                        $('.fixed.menu').transition('fade out');
+                    }
+                })
+            ;
+
+        })
+    ;
+</script>
+{% endblock %}
+
+
+<div class="ui inverted vertical masthead center aligned segment">
+
+    {% block menu%}
+        {% include "base/homepage_menu.html" %}
+    {% endblock %}
+
+    <div class="ui text container">
+    {% block header%}
+        <h1 class="ui inverted header">
+            Imagine me and you
+        </h1>
+        <h2>and you and me.</h2>
+    {% endblock %}
+    </div>
+
+</div>

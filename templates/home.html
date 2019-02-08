@@ -3,13 +3,38 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-  <p><a href="{% url 'password_reset' %}">reset password</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a><br>
-  <a href="{% url 'signup' %}">signup</a><br>
-{% endif %}
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+        <div class="row">
+            <div class="sixteen wide column">
+            {% if user.is_authenticated %}
+                <h1>Welcome back {{ user.username }}!</h1>
+            {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen wide column">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen wide column">
+            {% if user.is_authenticated %}
+              <p><a href="{% url 'logout' %}">logout</a></p>
+              <p><a href="{% url 'password_reset' %}">reset password</a></p>
+            {% else %}
+              <p>You are not logged in</p>
+              <a href="{% url 'login' %}">login</a><br>
+              <a href="{% url 'signup' %}">signup</a><br>
+            {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="sixteen wide column">
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+

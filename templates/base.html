@@ -1,13 +1,103 @@
 <!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
-</head>
-<body>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
-</body>
+    <head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="shortcut icon" type="image/png" href="{% static 'assets/favicon.ico' %}"/>
+
+        <!-- Site Properties -->
+        <title>{% block title %}Wouter's Homepage{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'components/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/site.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'components/container.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/grid.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/header.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/image.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/menu.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'components/divider.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/dropdown.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/segment.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/button.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/list.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/icon.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/sidebar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'components/transition.css' %}">
+        {% block css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'homepage.css' %}">
+        {% endblock %}
+        <script src="{% static 'library/jquery-3.3.1.slim.min.js' %}"></script>
+        <script src="{% static 'components/visibility.js' %}"></script>
+        <script src="{% static 'components/sidebar.js' %}"></script>
+        <script src="{% static 'components/transition.js' %}"></script>
+        <script src="https://unpkg.com/vue"></script>
+        <script>
+        $(document)
+        .ready(function() {
+
+            // create sidebar and attach to menu open
+            $('.ui.sidebar')
+            .sidebar('attach events', '.toc.item')
+            ;
+
+        })
+        ;
+        </script>
+        {% block script %}{% endblock %}
+    </head>
+    <body>
+        <!-- Sidebar Menu -->
+        <div class="ui vertical inverted sidebar menu">
+            <a class="item">Projects</a>
+            <a class="item">T.V.K.</a>
+            <a class="item">Professional</a>
+            {% if user.is_authenticated %}
+            <a href="/admin/" class="item">Admin</a>
+            <a class="item" href="{% url 'logout' %}">logout</a>
+            <a class="item" href="{% url 'password_reset' %}">reset password</a>
+            {% else %}
+            <a class="item" href="{% url 'login' %}">login</a>
+            <a class="item" href="{% url 'signup' %}">signup</a>
+            {% endif %}
+        </div>
+
+        <!-- Page Contents -->
+        <div class="pusher">
+
+            {% block masthead %}
+                <div class="ui inverted vertical masthead center aligned segment">
+
+                    {% block menu%}
+                        {% include "base/homepage_menu.html" %}
+                    {% endblock %}
+
+                    <div class="ui text container">
+                    {% block header%}
+                        <h1 class="ui inverted header">
+                            Imagine me and you
+                        </h1>
+                        <h2>and you and me.</h2>
+                    {% endblock %}
+                    </div>
+
+                    {% block action_button%}
+                    {% endblock %}
+
+                </div>
+            {% endblock %}
+
+            {% block content %}
+                {% include "segment_content.html" %}
+            {% endblock %}
+
+            {% block footer %}
+                {% include "footer.html" %}
+            {% endblock %}
+        </div>
+    </body>
 </html>

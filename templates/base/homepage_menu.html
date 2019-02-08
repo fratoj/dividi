@@ -1,0 +1,32 @@
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu">
+        <a class="toc item">
+          <i class="sidebar icon"></i>
+        </a>
+        <a href="{% url 'home' %}" class="active item">Home</a>
+        <a href="https://fratoj.tuvok.nl" class="item">Projects</a>
+        <a href="https://www.tuvok.nl/" class="item">T.V.K.</a>
+        <!--<a class="item">Professional</a>-->
+        <div class="right item">
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="ui inverted button">logout</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="ui inverted button">Log in</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- Sidebar Menu -->
+    <div class="ui vertical inverted sidebar menu">
+        <a href="{% url 'home' %}" class="active item">Home</a>
+        <a href="https://fratoj.tuvok.nl" class="item">Projects</a>
+        <a href="https://www.tuvok.nl/" class="item">T.V.K.</a>
+        {% if user.is_authenticated %}
+        <a href="/admin/" class="item">Admin</a>
+        <a href="{% url 'password_reset' %}" class="item">reset password</a>
+        <a href="{% url 'logout' %}" class="item">logout</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="item">login</a><br>
+        <a href="{% url 'signup' %}" class="item">signup</a><br>
+        {% endif %}
+    </div>
