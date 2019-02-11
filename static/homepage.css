@@ -6,10 +6,11 @@
     .masthead.segment {
       min-height: 290px;
       padding: 1em 0em;
+      /*background: url("https://www.yellenge.nl/wp-content/themes/yellenge/library/images/backgrounds/large/1-top-1.jpg") 50% 20% no-repeat !important;*/
       /*background: url("assets/Tavern_Scene_with_Smokers.jpg") 50% 0 no-repeat !important;*/
       /*background: url("assets/comrades_of_steel.png") 50% 0 no-repeat !important;*/
       /*background: url("assets/bookcase-books-bookshelves-159711.jpg") 50% 0 no-repeat !important;*/
-      background: url("assets/bookcase-books-06.png") 50% 0 no-repeat !important;
+      /*background: url("assets/bookcase-books-06.png") 50% 0 no-repeat !important;*/
       z-index: 0;
       margin-bottom: 1em !important;
     }
