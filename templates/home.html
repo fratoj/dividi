@@ -20,7 +20,11 @@
         <div class="row">
             <div class="sixteen wide column">
             {% if user.is_authenticated %}
-              <p><a href="{% url 'logout' %}">logout</a></p>
+                You are authenticated
+                {% if request.user.is_superuser %}
+                    and you are <a href="/admin/">admin</a>.
+                {% endif %}
+{#              <p><a href="{% url 'logout' %}">logout</a></p>#}
 {#              <p><a href="{% url 'password_reset' %}">reset password</a></p>#}
             {% else %}
               <p>You are not logged in</p>
