@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'tholisa.apps.TholisaConfig',
     'accounts.apps.AccountsConfig',
 ]
@@ -168,4 +169,3 @@ if not DEBUG:
     STATIC_ROOT = '/home/tuvok/domains/tvk.tuvok.nl/public_html/static/'
 else:
     SECRET_KEY = '*d4%8(a^qr)59eaquu#u-^=1r2yh!)k8f=ey^c*%g(^pt5jria'
-
