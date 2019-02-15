@@ -40,9 +40,13 @@ def pensis_detail(request, pk):
 class PensisView(APIView):
     permission_classes = (IsAuthenticated, )
 
-    def get(self, request):
-        pensis = Pensis.objects.all()
-        serializer = PensisSerializer(pensis, many=True)
+    def get(self, request, pk=None):
+        if pk:
+            thought = Pensis.objects.get(pk=pk)
+            serializer = PensisSerializer(thought, many=False)
+        else:
+            pensis = Pensis.objects.all()
+            serializer = PensisSerializer(pensis, many=True)
         return Response(serializer.data)
 
     def post(self, request):
