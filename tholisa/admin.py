@@ -1,7 +1,9 @@
 from datetime import datetime
-
+from django.utils import formats
 from django.contrib import admin
-from .models import Pensis
+from django.utils.text import slugify
+
+from .models import Pensis, Fib
 
 
 class PensisAdmin(admin.ModelAdmin):
@@ -30,7 +32,33 @@ class PensisAdmin(admin.ModelAdmin):
         return form
 
 
+class FibAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'content',)
+        }),
+        ('Advanced options', {
+            'classes': ('collapse',),
+            'fields': ('user', 'slug')
+        })
+    )
+    prepopulated_fields = {
+        'slug': ('title',),
+    }
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'user':
+            kwargs['initial'] = request.user.id
+        return super(FibAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(FibAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['title'].initial = slugify(formats.date_format(datetime.now(), "Y-m-d"))
+        return form
+
+
 admin.site.register(Pensis, PensisAdmin)
+admin.site.register(Fib, FibAdmin)
 
 """
 

@@ -9,10 +9,13 @@ from django.shortcuts import render, get_object_or_404
 # https://docs.djangoproject.com/en/2.1/topics/auth/default/#limiting-access-to-logged-in-users-that-pass-a-test
 # https://docs.djangoproject.com/en/2.1/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin
 #
+from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import IsAuthenticated
 
-from tholisa.serializers import PensisSerializer
-from .models import Pensis
+from accounts.models import Ibutho
+from tholisa.serializers import PensisSerializer, FibSerializer
+from .models import Pensis, Fib
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -76,3 +79,25 @@ class PensisView(APIView):
         return Response({
             'success': 'Thought [{}] deleted successfully'.format(thought.title)
         })
+
+
+class FibView(ListModelMixin, CreateModelMixin, GenericAPIView):
+    queryset = Fib.objects.all()
+    serializer_class = FibSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def perform_create(self, serializer):
+        user = get_object_or_404(Ibutho, id=self.request.data.get('user'))
+        return serializer.save(user=user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, *kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class SingleFibView(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, )
+    queryset = Fib.objects.all()
+    serializer_class = FibSerializer

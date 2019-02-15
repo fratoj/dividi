@@ -23,3 +23,18 @@ class Pensis(models.Model):
 
     def __str__(self):
         return self.headline
+
+
+class Fib(models.Model):
+    create_date = models.DateTimeField(auto_now_add=True)
+    modification_date = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=80)
+    content = models.TextField()
+    slug = models.SlugField()
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET(get_sentinel_user),
+    )
+
+    def __str__(self):
+        return self.title
