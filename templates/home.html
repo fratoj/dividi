@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load twitter_tag %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -25,6 +25,14 @@
                     and you are <a href="/admin/">admin</a>.
                 {% endif %}
                 </p>
+                {% get_tweets for "Albums2Hear" as tweets exclude "replies, retweets" limit 10 %}
+
+                <ul>
+                {% for tweet in tweets %}
+                    <li>{{ tweet.html|safe }}</li>
+                {% endfor %}
+                </ul>
+
 {#              <p><a href="{% url 'logout' %}">logout</a></p>#}
 {#              <p><a href="{% url 'password_reset' %}">reset password</a></p>#}
             {% else %}

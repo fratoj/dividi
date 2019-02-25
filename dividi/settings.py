@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'twitter_tag',
     'tholisa.apps.TholisaConfig',
     'accounts.apps.AccountsConfig',
 ]
@@ -160,6 +161,17 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# Twitter SPI settings
+# Your access token: Access token
+TWITTER_OAUTH_TOKEN = '62467473-03fKH3EezWlIH6nFDdCixAJFmoEqZRew3XkH8vMqe'
+# Your access token: Access token secret
+TWITTER_OAUTH_SECRET = 'h3b5FSdgWxMOqZopuBWsef9tzBjeYbojDnx6mXxX05hga'
+# OAuth settings: Consumer key
+TWITTER_CONSUMER_KEY = 'KhbAwB4A52iZ1YWkLscX57QKX'
+# OAuth settings: Consumer secret
+TWITTER_CONSUMER_SECRET = 'tUSv9lAyyROZw6i43cCPPbxvckWpkJz8LiyyEMUrB7Isg3V5k9'
+
 
 # Production settings
 if not DEBUG:
