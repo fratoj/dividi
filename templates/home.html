@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Home{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'editor/css/medium-editor.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'editor/css/themes/default.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="ui vertical stripe segment">
@@ -9,37 +15,48 @@
             <div class="sixteen wide column">
             {% if user.is_authenticated %}
                 <h1>Welcome back {{ user.username }}!</h1>
-            {% endif %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="sixteen wide column">
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="sixteen wide column">
-            {% if user.is_authenticated %}
-                <p>You are authenticated
+                You are authenticated
                 {% if request.user.is_superuser %}
                     and you are <a href="/admin/">admin</a>.
                 {% endif %}
-                </p>
-{#              <p><a href="{% url 'logout' %}">logout</a></p>#}
-{#              <p><a href="{% url 'password_reset' %}">reset password</a></p>#}
             {% else %}
-              <p>You are not logged in</p>
-{#              <a href="{% url 'login' %}">login</a><br>#}
-{#              <a href="{% url 'signup' %}">signup</a><br>#}
+              You are not logged in
             {% endif %}
             </div>
         </div>
+
         <div class="row">
             <div class="sixteen wide column">
-                <hr>
+                <div class="ui basic attached segment">
+                    <h1 class="ui top editable header"></h1>
+                </div>
+
+                <div class="ui attached segment">
+                    <div class="ui basic editable segment"></div>
+                </div>
+
+                <div class="ui bottom clearing attached segment">
+                    <button class="ui right floated primary button">
+                      Save
+                    </button>
+                    <button class="ui right floated basic button">
+                      Discard
+                    </button>
+                </div>
+
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
 
+{% block endbody %}
+    <script src="{% static 'editor/js/medium-editor.min.js' %}"></script>
+    <script>
+        new MediumEditor('.editable', {
+            toolbar: {
+                buttons: ['bold', 'italic', 'underline', 'h1', 'h3', 'quote'],
+            }});
+    </script>
+{% endblock %}

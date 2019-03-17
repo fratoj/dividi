@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load twitter_tag %}
+
+{% block content %}
+<div class="row">
+    <div class="sixteen wide column">
+        <hr>
+
+        <div class="ui list">
+        {% get_tweets for "Albums2Hear" as tweets exclude "replies, retweets" limit 10 %}
+        {% for tweet in tweets %}
+            <div class="item">{{ tweet.text|urlize }}</div>
+        {% endfor %}
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
