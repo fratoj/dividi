@@ -1,16 +1,16 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Ibutho
+from .models import Author
 
 
-class IbuthoCreationForm(UserCreationForm):
+class AuthorCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
-        model = Ibutho
+        model = Author
         fields = ('username', 'email')
 
 
-class IbuthoChangeForm(UserChangeForm):
+class AuthorChangeForm(UserChangeForm):
 
     class Meta:
-        model = Ibutho
+        model = Author
         fields = ('username', 'email', 'profile')

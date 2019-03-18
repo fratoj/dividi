@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Ibutho',
+            name='Author',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('password', models.CharField(max_length=128, verbose_name='password')),
@@ -51,12 +51,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AddField(
-            model_name='ibutho',
+            model_name='author',
             name='profile',
             field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='accounts.Profile'),
         ),
         migrations.AddField(
-            model_name='ibutho',
+            model_name='author',
             name='user_permissions',
             field=models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions'),
         ),

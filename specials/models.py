@@ -8,7 +8,7 @@ def get_sentinel_user():
     return get_user_model().objects.get_or_create(username='deleted')[0]
 
 
-class Pensis(models.Model):
+class Thought(models.Model):
     pub_date = models.DateField()
     create_date = models.DateTimeField(auto_now_add=True)
     modification_date = models.DateTimeField(auto_now=True)

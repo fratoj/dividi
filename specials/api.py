@@ -1,13 +1,13 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
-from tholisa.views import PensisView, FibView, SingleFibView
+from specials.views import ThoughtView, FibView, SingleFibView
 
-app_name = 'tholisa.api'
+app_name = 'specials.api'
 
 urlpatterns = [
-    path('pensis/', PensisView.as_view()),
-    path('pensis/<int:pk>', PensisView.as_view()),
+    path('thought/', ThoughtView.as_view()),
+    path('thought/<int:pk>', ThoughtView.as_view()),
     path('fib/', FibView.as_view()),
     path('fib/<int:pk>', SingleFibView.as_view()),
     path('token-auth/', obtain_auth_token, name='token_auth'),

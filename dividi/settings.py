@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'crispy_forms',
     'crispy_forms_semantic_ui',
-    'tholisa.apps.TholisaConfig',
+    'specials.apps.SpecialsConfig',
     'accounts.apps.AccountsConfig',
 ]
 
@@ -87,7 +87,7 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 # Use our own user
-AUTH_USER_MODEL = 'accounts.Ibutho'
+AUTH_USER_MODEL = 'accounts.Author'
 
 # Store the emails sent in a temp folder
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
