@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404
 # https://docs.djangoproject.com/en/2.1/topics/auth/default/#limiting-access-to-logged-in-users-that-pass-a-test
 # https://docs.djangoproject.com/en/2.1/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin
 #
+from django.views.generic.base import TemplateView
 from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import IsAuthenticated
@@ -38,6 +39,10 @@ def pensis_detail(request, pk):
         "pub_date": thought.pub_date,
     }}
     return JsonResponse(data)
+
+
+class HomeView(TemplateView):
+    pass
 
 
 class PensisView(APIView):

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'crispy_forms',
+    'crispy_forms_semantic_ui',
     'tholisa.apps.TholisaConfig',
     'accounts.apps.AccountsConfig',
 ]
@@ -160,6 +162,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3',
+                                 'bootstrap4', 'semantic-ui',)
+CRISPY_TEMPLATE_PACK = 'semantic-ui'
+
 
 # Production settings
 if not DEBUG:
