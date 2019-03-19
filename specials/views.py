@@ -1,22 +1,20 @@
+import tomd
 from django.http import JsonResponse
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+from django.utils.html import strip_tags
 
-# Create your views here.
-# https://docs.djangoproject.com/en/2.1/topics/auth/default/#the-login-required-decorator
-# https://docs.djangoproject.com/en/2.1/topics/auth/default/#the-loginrequired-mixin
-#
-# for users on a per frontend base:
-# https://docs.djangoproject.com/en/2.1/topics/auth/default/#limiting-access-to-logged-in-users-that-pass-a-test
-# https://docs.djangoproject.com/en/2.1/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin
-#
-from django.views import generic
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import IsAuthenticated
 
 from accounts.models import Author
-from specials.forms import ExampleForm
+from specials.forms import FibForm
 from specials.serializers import ThoughtSerializer, FibSerializer
 from .models import Thought, Fib
 from rest_framework.response import Response
@@ -110,7 +108,27 @@ class SingleFibView(RetrieveUpdateDestroyAPIView):
     serializer_class = FibSerializer
 
 
-class FibIndexView(generic.ListView):
-    form_class=ExampleForm
+class FibCreateView(CreateView):
+    form_class = FibForm
     model = Fib
-    template_name = 'specials/fib_index_list.html'
+    # template_name = 'specials/fib_index_list.html'
+
+    def get_success_url(self):
+        return reverse('specials:fib_list')
+
+    def form_valid(self, form):
+        fib = form.save(commit=False)
+        fib.content = tomd.convert(fib.content)
+        loggedin_user = Author.objects.get(id=self.request.user.id)
+        fib.user = loggedin_user
+        fib.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+
+class FibIndexView(ListView):
+    model = Fib
+    fields = ('title', 'content', 'user', )
+
+
+class FibDetailView(DetailView):
+    model = Fib

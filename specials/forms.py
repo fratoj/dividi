@@ -1,34 +1,38 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout
+
+from specials.models import Fib
+from specials.widgets import TitleInputMediumEditorWidget, TextareaMediumEditorWidget
 
 
-class ExampleForm(forms.Form):
-    like_website = forms.TypedChoiceField(
-        label="Do you like this website?",
-        choices=((1, "Yes"), (0, "No")),
-        coerce=lambda x: bool(int(x)),
-        widget=forms.RadioSelect,
-        initial='1',
-        required=True,
-    )
+class FibForm(forms.ModelForm):
+    title = forms.CharField(widget=TitleInputMediumEditorWidget(
+        attrs={'class': 'ui top editable thought__title header'}
+    ))
+    content = forms.Field(widget=TextareaMediumEditorWidget(
+        attrs={'class': 'ui top editable thought__content header'}
+    ))
 
-    favorite_food = forms.CharField(
-        label="What is your favorite food?",
-        max_length=80,
-        required=True,
-    )
+    class Meta:
+        model = Fib
+        exclude = ('slug', 'user',)
 
-    favorite_color = forms.CharField(
-        label="What is your favorite color?",
-        max_length=80,
-        required=True,
-    )
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_tag = False
 
-    favorite_number = forms.IntegerField(
-        label="Favorite number",
-        required=False,
-    )
+        self.helper.layout = Layout(
+            'title', 'content',
+        )
 
-    notes = forms.CharField(
-        label="Additional notes or feedback",
-        required=False,
-    )
+        super(FibForm, self).__init__(*args, **kwargs)
+        self.fields['title'].label = False
+        self.fields['content'].label = False
+        self.fields['title'].required = True
+        self.fields['content'].required = True
+
+    def clean(self):
+        self.cleaned_data['content'] = self.cleaned_data['content'].strip()
+        return super(FibForm, self).clean()
+

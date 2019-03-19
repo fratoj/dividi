@@ -1,0 +1,9 @@
+{% load static %}
+<div class="ui attached segment">
+    <div class="ui basic segment">
+        <textarea
+            name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+            {% if widget.value %}{{ widget.value }}{% endif %}
+        </textarea>
+    </div>
+</div>
