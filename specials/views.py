@@ -1,4 +1,3 @@
-import tomd
 from django.http import JsonResponse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -14,6 +13,7 @@ from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import IsAuthenticated
 
 from accounts.models import Author
+from specials import tomd
 from specials.forms import FibForm
 from specials.serializers import ThoughtSerializer, FibSerializer
 from .models import Thought, Fib
@@ -128,6 +128,11 @@ class FibCreateView(CreateView):
 class FibIndexView(ListView):
     model = Fib
     fields = ('title', 'content', 'user', )
+    ordering = ['-create_date']
+
+    def get(self, request, *args, **kwargs):
+        print('Bla bla bla ...')
+        return super(FibIndexView, self).get(request, *args, **kwargs)
 
 
 class FibDetailView(DetailView):

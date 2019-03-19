@@ -3,22 +3,67 @@
 {% block title %}All Fibs{% endblock %}
 
 {% block content %}
-    <h1 class="ui top attached header">
+    <h1 class="ui header">
         List of fibs
         <a href="{% url 'specials:fib_create' %}" class="ui right floated circular basic button">
             <i class="plus icon"></i>
         </a>
     </h1>
+
+{#<div class="ui cards">#}
+{#    {% for object in object_list %}#}
+{#  <div class="card">#}
+{#    <div class="content">#}
+{#        <h3 class="header">#}
+{#            {{ object.title }}#}
+{#        </h3>#}
+{#        <div class="segment">#}
+{#        {{ object.content | safe }}#}
+{#        </div>#}
+{#        {% empty %}#}
+{#        <div class="ui segment">#}
+{#            No fibs yet.#}
+{#        </div>#}
+{#    </div>#}
+{#  </div>#}
+{#    {% endfor %}#}
+{#</div>#}
+
+<div class="ui cards">
     {% for object in object_list %}
-        <h3 class="ui attached header">
-            {{ object.title }}
-        </h3>
-        <div class="ui attached segment">
-        {{ object.content | safe }}
+        <div class="card">
+            <div class="content">
+                <div class="header">{{ object.title }}</div>
+                <div class="meta">By: {{ object.user.username }}</div>
+                <div class="description">
+                {{ object.content | safe }}
+                </div>
+                <div class="meta">{{ object.create_date | date }}</div>
+            </div>
         </div>
-        {% empty %}
-        <div class="ui attached segment">
-            No fibs yet.
+    {% empty %}
+        <div class="card">
+            <div class="content">
+                <div class="header">No Fibs yet</div>
+                <div class="meta">Empty</div>
+                <div class="description">
+                You can create one by clicking the (+) icon
+                </div>
+            </div>
         </div>
     {% endfor %}
+</div>
+
+{#    {% for object in object_list %}#}
+{#        <h3 class="ui attached header">#}
+{#            {{ object.title }}#}
+{#        </h3>#}
+{#        <div class="ui attached segment">#}
+{#        {{ object.content | safe }}#}
+{#        </div>#}
+{#        {% empty %}#}
+{#        <div class="ui attached segment">#}
+{#            No fibs yet.#}
+{#        </div>#}
+{#    {% endfor %}#}
 {% endblock %}
