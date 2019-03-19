@@ -3,10 +3,10 @@ from django.utils import formats
 from django.contrib import admin
 from django.utils.text import slugify
 
-from .models import Pensis, Fib
+from .models import Thought, Fib
 
 
-class PensisAdmin(admin.ModelAdmin):
+class ThoughtAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('title', 'headline', 'content')
@@ -24,10 +24,10 @@ class PensisAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'user':
             kwargs['initial'] = request.user.id
-        return super(PensisAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+        return super(ThoughtAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_form(self, request, obj=None, **kwargs):
-        form = super(PensisAdmin, self).get_form(request, obj, **kwargs)
+        form = super(ThoughtAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['pub_date'].initial = datetime.now()
         return form
 
@@ -57,7 +57,7 @@ class FibAdmin(admin.ModelAdmin):
         return form
 
 
-admin.site.register(Pensis, PensisAdmin)
+admin.site.register(Thought, ThoughtAdmin)
 admin.site.register(Fib, FibAdmin)
 
 """

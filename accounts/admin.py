@@ -1,15 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import IbuthoCreationForm, IbuthoChangeForm
-from .models import Ibutho
+from .forms import AuthorChangeForm, AuthorCreationForm
+from .models import Author
 
 
-class IbuthoAdmin(UserAdmin):
-    add_form = IbuthoCreationForm
-    form = IbuthoChangeForm
-    model = Ibutho
+class AuthorAdmin(UserAdmin):
+    add_form = AuthorCreationForm
+    form = AuthorChangeForm
+    model = Author
     list_display = ['email', 'username', ]
 
 
-admin.site.register(Ibutho, IbuthoAdmin)
+admin.site.register(Author, AuthorAdmin)

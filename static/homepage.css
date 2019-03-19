@@ -1,3 +1,6 @@
+.thought__body {
+  min-height: 6em;
+}
 
     .hidden.menu {
       display: none;

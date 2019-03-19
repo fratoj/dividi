@@ -1,12 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block title %}Home{% endblock %}
-{% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'editor/css/medium-editor.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'editor/css/themes/default.css' %}">
-{% endblock %}
 
 {% block content %}
 <div class="ui vertical stripe segment">
@@ -25,38 +19,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="sixteen wide column">
-                <div class="ui basic attached segment">
-                    <h1 class="ui top editable header"></h1>
-                </div>
-
-                <div class="ui attached segment">
-                    <div class="ui basic editable segment"></div>
-                </div>
-
-                <div class="ui bottom clearing attached segment">
-                    <button class="ui right floated primary button">
-                      Save
-                    </button>
-                    <button class="ui right floated basic button">
-                      Discard
-                    </button>
-                </div>
-
-            </div>
-        </div>
-
     </div>
 </div>
-{% endblock %}
-
-{% block endbody %}
-    <script src="{% static 'editor/js/medium-editor.min.js' %}"></script>
-    <script>
-        new MediumEditor('.editable', {
-            toolbar: {
-                buttons: ['bold', 'italic', 'underline', 'h1', 'h3', 'quote'],
-            }});
-    </script>
 {% endblock %}

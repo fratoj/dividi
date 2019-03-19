@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'tholisa.apps.TholisaConfig',
+    'crispy_forms',
+    'crispy_forms_semantic_ui',
+    'specials.apps.SpecialsConfig',
     'accounts.apps.AccountsConfig',
 ]
 
@@ -85,7 +87,7 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
 # Use our own user
-AUTH_USER_MODEL = 'accounts.Ibutho'
+AUTH_USER_MODEL = 'accounts.Author'
 
 # Store the emails sent in a temp folder
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
@@ -141,9 +143,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'nl-nl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
 
@@ -160,6 +162,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3',
+                                 'bootstrap4', 'semantic-ui',)
+CRISPY_TEMPLATE_PACK = 'semantic-ui'
+
 
 # Production settings
 if not DEBUG:

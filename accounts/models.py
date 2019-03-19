@@ -26,8 +26,8 @@ class Profile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
 
 
-# ibutho is Zoeloe for warrior
-class Ibutho(AbstractUser):
+#
+class Author(AbstractUser):
     # Additional fields can be added here
     profile = models.OneToOneField(Profile, on_delete=models.CASCADE, null=True)
 

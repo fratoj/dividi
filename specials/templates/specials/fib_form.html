@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}New Fib{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="twelve wide center column">
+            <form method="post">
+                {% crispy form  form.helper %}
+                <div class="ui bottom clearing attached segment">
+                    <button type="submit" class="ui right labeled icon right floated button">
+                        <i class="check icon"></i>
+                        Save
+                    </button>
+                    <a href="{% url 'specials:fib_list' %}" class="ui labeled icon right floated button">
+                        <i class="close icon"></i>
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="twelve wide hidden markdown column"></div>
+    </div>
+{% endblock %}
