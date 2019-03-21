@@ -1,21 +1,27 @@
-    <div class="ui container">
-      <div class="ui large secondary inverted pointing menu">
+<div class="ui container">
+    <div class="ui large secondary inverted pointing menu">
         <a class="toc item">
-          <i class="sidebar icon"></i>
+            <i class="sidebar icon"></i>
         </a>
         <a href="{% url 'home' %}" class="active item">Home</a>
-        <a href="{% url 'specials:fib_list' %}" class="item">Specials</a>
-        <a href="https://www.tuvok.nl/" class="item">T.V.K.</a>
-        <!--<a class="item">Professional</a>-->
-        <div class="right item">
-            {% if user.is_authenticated %}
-                {% if request.user.is_superuser %}
-                    <a href="/admin/" class="ui inverted button darkgrey">Admin</a>
-                {% endif %}
-                <a href="{% url 'logout' %}" class="ui inverted button">logout</a>
-            {% else %}
-            <a href="{% url 'login' %}" class="ui inverted button">Log in</a>
-            {% endif %}
+        <div class="ui simple dropdown item">
+            Specials <i class="dropdown icon"></i>
+            <div class="menu">
+                <a href="{% url 'specials:fib_list' %}" class="item">Fibs</a>
+                <a href="{% url 'specials:thought_list' %}" class="item">Thoughts</a>
+            </div>
         </div>
-      </div>
+            <a href="https://www.tuvok.nl/" class="item">T.V.K.</a>
+            <!--<a class="item">Professional</a>-->
+            <div class="right item">
+                {% if user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                        <a href="/admin/" class="ui inverted button darkgrey">Admin</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}" class="ui inverted button">logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="ui inverted button">Log in</a>
+                {% endif %}
+            </div>
+        </div>
     </div>

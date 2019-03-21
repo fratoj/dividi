@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+{#<div class="ui cards">#}
+    <div class="ui centered card">
+        <div class="content">
+            <div class="header">{{ object.title }}</div>
+            <div class="meta">By: {{ object.user.username }}</div>
+            <div class="description">
+            {{ object.content | safe }}
+            </div>
+            <div class="meta">{{ object.create_date | date }}</div>
+        </div>
+    </div>
+{#</div>#}
+{% endblock %}

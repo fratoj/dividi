@@ -1,7 +1,7 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 
-from specials.views import ThoughtView, FibView, SingleFibView
+from specials.api_views import ThoughtView, FibView, SingleFibView
 
 app_name = 'specials.api'
 

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}All Fibs{% endblock %}
+{% block title %}All Thoughts{% endblock %}
 
 {% block content %}
 <h1 class="ui header">
-    List of fibs
+    List of thoughts
     {% if user.is_authenticated %}
-    <a href="{% url 'specials:fib_create' %}" class="ui right floated circular basic button">
+    <a href="{% url 'specials:thought_create' %}" class="ui right floated circular basic button">
         <i class="plus icon"></i>
     </a>
     {% endif %}
@@ -27,7 +27,7 @@
     {% empty %}
         <div class="card">
             <div class="content">
-                <div class="header">No Fibs yet</div>
+                <div class="header">No Thoughts yet</div>
                 <div class="meta">Empty</div>
                 <div class="description">
                 You can create one by clicking the (+) icon
