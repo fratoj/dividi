@@ -13,6 +13,7 @@ djangorestframework = "*"
 django-crispy-forms = "*"
 crispy-forms-semantic-ui = "*"
 djangorestframework-stubs = "*"
+django-markdownx = "*"
 
 [requires]
 python_version = "3.7"

@@ -1,9 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.utils.html import strip_tags
-
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
@@ -11,14 +11,14 @@ from django.views.generic.list import ListView
 from rest_framework.generics import GenericAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from accounts.models import Author
 from specials import tomd
 from specials.forms import FibForm
 from specials.serializers import ThoughtSerializer, FibSerializer
 from .models import Thought, Fib
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
 
 def thought_list(request):
@@ -46,7 +46,7 @@ class HomeView(TemplateView):
 
 
 class ThoughtView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, pk=None):
         if pk:
@@ -89,7 +89,7 @@ class ThoughtView(APIView):
 class FibView(ListModelMixin, CreateModelMixin, GenericAPIView):
     queryset = Fib.objects.all()
     serializer_class = FibSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         user = get_object_or_404(Author, id=self.request.data.get('user'))
@@ -103,14 +103,15 @@ class FibView(ListModelMixin, CreateModelMixin, GenericAPIView):
 
 
 class SingleFibView(RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
     queryset = Fib.objects.all()
     serializer_class = FibSerializer
 
 
-class FibCreateView(CreateView):
+class FibCreateView(LoginRequiredMixin, CreateView):
     form_class = FibForm
     model = Fib
+
     # template_name = 'specials/fib_index_list.html'
 
     def get_success_url(self):
@@ -127,7 +128,7 @@ class FibCreateView(CreateView):
 
 class FibIndexView(ListView):
     model = Fib
-    fields = ('title', 'content', 'user', )
+    fields = ('title', 'content', 'user',)
     ordering = ['-create_date']
 
     def get(self, request, *args, **kwargs):

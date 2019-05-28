@@ -3,16 +3,11 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
 
 from specials.models import Fib
-from specials.widgets import TitleInputMediumEditorWidget, TextareaMediumEditorWidget
 
 
 class FibForm(forms.ModelForm):
-    title = forms.CharField(widget=TitleInputMediumEditorWidget(
-        attrs={'class': 'ui top editable thought__title header'}
-    ))
-    content = forms.Field(widget=TextareaMediumEditorWidget(
-        attrs={'class': 'ui top editable thought__content header'}
-    ))
+    title = forms.CharField()
+    content = forms.Field()
 
     class Meta:
         model = Fib

@@ -9,7 +9,6 @@
     <div class="row">
         <div class="twelve wide center column">
             <form method="post">
-                {% crispy form  form.helper %}
                 <div class="ui bottom clearing attached segment">
                     <button type="submit" class="ui right labeled icon right floated button">
                         <i class="check icon"></i>
@@ -20,6 +19,7 @@
                         Cancel
                     </a>
                 </div>
+                {% crispy form  form.helper %}
             </form>
         </div>
         <div class="twelve wide hidden markdown column"></div>
